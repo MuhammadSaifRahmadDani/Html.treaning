@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roadmap Belajar PHP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#131226; --panel:#1b1a33; --panel2:#211f3d; --border:#312e56;
+  --text:#e7e5f5; --dim:#8d8aab; --accent:#9b96f0; --done:#f0a73b; --done-bg:rgba(240,167,59,.12);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;line-height:1.5;min-height:100%}
+.wrap{max-width:760px;margin:0 auto;padding:28px 18px 80px}
+
+.term{background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:22px}
+.term-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;background:var(--panel2);border-bottom:1px solid var(--border)}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.r{background:#e5695c}.dot.y{background:#e5b95c}.dot.g{background:#5ce593}
+.term-bar span{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--dim)}
+.term-body{padding:20px 18px}
+h1{margin:0 0 4px;font-size:1.5rem;font-weight:700;letter-spacing:-.01em}
+.sub{color:var(--dim);font-size:.92rem;margin:0 0 18px}
+
+.prog{height:8px;background:var(--panel2);border-radius:6px;overflow:hidden;border:1px solid var(--border)}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--done));width:0%;transition:width .5s ease}
+.prog-row{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);margin-top:6px}
+
+section{margin-bottom:16px}
+.lvl-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--panel);border:1px solid var(--border);border-radius:8px;cursor:pointer;user-select:none}
+.lvl-head:hover{border-color:var(--accent)}
+.lvl-title{display:flex;align-items:center;gap:10px}
+.lvl-title b{font-size:.95rem}
+.lvl-count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);white-space:nowrap}
+.chev{color:var(--dim);transition:transform .25s ease;flex-shrink:0}
+.lvl-head.open .chev{transform:rotate(90deg)}
+.mini{width:52px;height:5px;background:var(--panel2);border-radius:4px;overflow:hidden;border:1px solid var(--border)}
+.mini i{display:block;height:100%;background:var(--done);width:0%;transition:width .4s ease}
+
+.items{list-style:none;margin:0;padding:0;border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow:hidden;max-height:0;transition:max-height .3s ease}
+.items.open{max-height:3000px}
+.item{display:flex;align-items:center;gap:12px;padding:10px 16px;border-top:1px solid var(--border);background:var(--panel);transition:background .2s}
+.item:hover{background:var(--panel2)}
+.item.done{background:var(--done-bg)}
+.num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim);width:28px;flex-shrink:0}
+.box{width:19px;height:19px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;position:relative;cursor:pointer;background:var(--panel2)}
+.box.checked{background:var(--done);border-color:var(--done)}
+.box.checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--bg);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.label{flex:1;font-size:.92rem;cursor:pointer}
+.item.done .label{color:var(--dim);text-decoration:line-through;text-decoration-color:var(--border)}
+
+.proj-item .num{color:var(--done)}
+footer{text-align:center;color:var(--dim);font-size:12.5px;margin-top:24px;font-family:'JetBrains Mono',monospace}
+.reset{background:none;border:1px solid var(--border);color:var(--dim);padding:8px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;margin-top:10px}
+.reset:hover{color:var(--text);border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="term">
+    <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>roadmap-php.php</span></div>
+    <div class="term-body">
+      <h1>Roadmap Belajar PHP</h1>
+      <p class="sub">Klik kotak untuk menandai selesai — progres kamu tersimpan otomatis di browser ini.</p>
+      <div class="prog"><i id="overallBar"></i></div>
+      <div class="prog-row"><span id="overallText">0 / 0 selesai</span><span id="overallPct">0%</span></div>
+      <button class="reset" id="resetBtn">Reset semua progres</button>
+    </div>
+  </div>
+
+  <div id="levels"></div>
+</div>
+<footer>tersimpan secara lokal di perangkat ini · tidak dikirim ke mana pun</footer>
+
+<script>
+const DATA = [
+["LEVEL 1 — Dasar PHP",["Pengenalan PHP","Instalasi PHP","XAMPP / Laragon","Syntax PHP","echo","Komentar","Variabel","Tipe Data","Konstanta","Operator","String","Array","Associative Array","Multidimensional Array"]],
+["LEVEL 2 — Logika Pemrograman PHP",["if","else","elseif","switch","for","while","do while","foreach","break","continue","Function","Parameter","Return","Scope Variable"]],
+["LEVEL 3 — PHP + HTML",["PHP di dalam HTML","Menampilkan data PHP ke HTML","Form HTML + PHP","GET","POST","Validasi input","isset()","empty()","include","require"]],
+["LEVEL 4 — Database MySQL",["Konsep Database","MySQL","phpMyAdmin","Database","Table","Primary Key","Foreign Key","INSERT","SELECT","UPDATE","DELETE","WHERE","ORDER BY","LIMIT","JOIN"]],
+["LEVEL 5 — PHP + MySQL",["Koneksi PHP ke MySQL","Menampilkan data database","Menambahkan data","Mengedit data","Menghapus data","Search data","Pagination","CRUD"]],
+["LEVEL 6 — Form & Authentication",["Login","Register","Logout","Session","Cookie","Password Hashing","password_hash()","password_verify()","Proteksi halaman","Role User / Admin"]],
+["LEVEL 7 — PHP Backend",["Struktur folder backend","Routing sederhana","MVC","Model","View","Controller","OOP PHP","Class","Object","Constructor","Inheritance","Encapsulation","Exception Handling"]],
+["LEVEL 8 — Keamanan PHP",["SQL Injection","Prepared Statement","XSS","CSRF","Validasi input","Sanitasi data","Session Security"]],
+["LEVEL 9 — PHP Modern",["Composer","Package","Autoloading","Namespace","Environment .env","REST API","JSON","HTTP Request","HTTP Response"]],
+["LEVEL 10 — Framework",["Laravel","Laravel Routing","Controller","Blade","Migration","Eloquent ORM","Authentication","Middleware","API","Deployment"]],
+["🚀 Urutan Project Praktik",["Kalkulator PHP","Form Biodata","Form Login Sederhana","To-Do List","CRUD Data Mahasiswa","CRUD Data Buku","Sistem Login & Register","Sistem Data Nilai Mahasiswa","Sistem Perpustakaan","Sistem Informasi Organisasi Kampus","Blog Sederhana","E-Commerce Sederhana","REST API","Project Laravel frontend modern (HTML, desain menarik + animasi)"]]
+];
+
+const KEY = "php_roadmap_progress_v1";
+let state = {};
+try{ state = JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ state = {}; }
+
+const levelsEl = document.getElementById("levels");
+let totalItems = 0;
+
+DATA.forEach((lvl, li)=>{
+  const [title, items] = lvl;
+  totalItems += items.length;
+  const sec = document.createElement("section");
+
+  const head = document.createElement("div");
+  head.className = "lvl-head";
+  head.innerHTML = `<div class="lvl-title"><svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><b>${title}</b></div>
+  <div style="display:flex;align-items:center;gap:10px"><div class="mini"><i id="mini-${li}"></i></div><span class="lvl-count" id="count-${li}"></span></div>`;
+
+  const ul = document.createElement("ul");
+  ul.className = "items";
+  items.forEach((label, ii)=>{
+    const id = `${li}-${ii}`;
+    const li_el = document.createElement("li");
+    li_el.className = "item" + (title.includes("Project") ? " proj-item" : "");
+    li_el.dataset.id = id;
+    li_el.innerHTML = `<span class="num">${String(ii+1).padStart(2,"0")}</span><span class="box"></span><span class="label">${label}</span>`;
+    li_el.addEventListener("click", ()=> toggle(id));
+    ul.appendChild(li_el);
+  });
+
+  head.addEventListener("click", ()=>{
+    head.classList.toggle("open");
+    ul.classList.toggle("open");
+  });
+
+  sec.appendChild(head);
+  sec.appendChild(ul);
+  levelsEl.appendChild(sec);
+});
+
+function render(){
+  let doneTotal = 0;
+  DATA.forEach((lvl, li)=>{
+    const items = lvl[1];
+    let doneLvl = 0;
+    items.forEach((_, ii)=>{
+      const id = `${li}-${ii}`;
+      const el = document.querySelector(`.item[data-id="${id}"]`);
+      const box = el.querySelector(".box");
+      const isDone = !!state[id];
+      el.classList.toggle("done", isDone);
+      box.classList.toggle("checked", isDone);
+      if(isDone){ doneLvl++; doneTotal++; }
+    });
+    document.getElementById(`count-${li}`).textContent = `${doneLvl}/${items.length}`;
+    document.getElementById(`mini-${li}`).style.width = `${items.length ? (doneLvl/items.length*100) : 0}%`;
+  });
+  document.getElementById("overallBar").style.width = `${totalItems ? (doneTotal/totalItems*100) : 0}%`;
+  document.getElementById("overallText").textContent = `${doneTotal} / ${totalItems} selesai`;
+  document.getElementById("overallPct").textContent = `${totalItems ? Math.round(doneTotal/totalItems*100) : 0}%`;
+}
+
+function toggle(id){
+  state[id] = !state[id];
+  try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+  render();
+}
+
+document.getElementById("resetBtn").addEventListener("click", ()=>{
+  if(confirm("Reset semua progres checklist?")){
+    state = {};
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+    render();
+  }
+});
+
+// buka level pertama secara default
+document.querySelector(".lvl-head").classList.add("open");
+document.querySelector(".items").classList.add("open");
+
+render();
+</script>
+</body>
+</html>
